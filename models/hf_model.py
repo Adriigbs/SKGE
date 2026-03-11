@@ -28,22 +28,24 @@ class HFModel:
             {"role": "user", "content": prompt}
         ]
 
-        messages = self.tokenizer(
-            prompt, 
+        messages = self.tokenizer.apply_chat_template(prompt, add_generation_prompt=True, tokenize=False)
+
+        inputs = self.tokenizer(
+            messages, 
             return_tensors="pt", 
             max_length=2048,
             ).to(self.model.device)
         
         with torch.no_grad():
             output = self.model.generate(
-                **messages,
+                **inputs,
                 max_new_tokens=2048,
                 do_sample=False,
                 pad_token_id=self.tokenizer.eos_token_id
             )
         
         output = self.tokenizer.decode(
-            output[0][messages['input_ids'].shape[1]:],
+            output[0][inputs['input_ids'].shape[1]:],
             skip_special_tokens=True
             )
         
