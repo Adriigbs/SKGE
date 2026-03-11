@@ -1,0 +1,64 @@
+Your task is to extract a structured knowledge graph from a planning problem.
+You will produce exactly three lists of triples. Triples follow these rules:
+
+REPRESENTATION RULES:
+- Unary predicates map to node attributes: clear(X) → X has attribute clear
+- Binary predicates map to directed edges: on(X,Y) → edge labeled "on" from X to Y
+- Triples for unary predicates take the form [Entity, is, Property]
+- Triples for binary predicates take the form [Entity, Relation, Entity]
+- Never use "true" or "false" as triple elements
+- Never use generic terms like "block" as an entity — always use the specific 
+  canonical name
+
+Follow these steps in order:
+
+STEP 1 — CANONICALIZE ENTITIES
+Identify all physical objects mentioned. Assign each a canonical name using
+the form <color>_block (e.g. blue_block, orange_block). Fixed entities are
+"table" and "hand". Never use generic terms like "block" or "object".
+
+STEP 2 — EXTRACT CONSTRAINT TRIPLES
+Extract the action schemas from the rules section. These are static and do 
+not change with the problem instance. Use variable placeholders X and Y for 
+block arguments, not specific block names.
+
+Valid constraint relation types (use only these):
+- [action(X), requires, predicate] — precondition that must hold
+- [action(X), adds, predicate] — becomes true after action
+- [action(X), removes, predicate] — becomes false after action
+
+For unary predicates in constraints write the predicate as-is: clear(X)
+For binary predicates in constraints write the predicate as-is: on(X,Y)
+For negated preconditions write: not(predicate)
+
+STEP 3 — EXTRACT STATE TRIPLES
+Extract only the current world state from the [STATEMENT] block.
+Do not extract goal state here — only what is explicitly stated as currently true.
+Apply representation rules: unary predicates become [Entity, is, Property],
+binary predicates become [Entity, Relation, Entity].
+
+STEP 4 — EXTRACT GOAL TRIPLES
+Extract only the goal conditions using the same representation rules as Step 3.
+
+Rules:
+- Never invent relation types outside the lists above
+- Never include narrative sentences or comparatives as triples
+
+Output format — return exactly this structure, no explanation:
+
+CONSTRAINT TRIPLES:
+[triple]
+...
+
+STATE TRIPLES:
+[triple]
+...
+
+GOAL TRIPLES:
+[triple]
+...
+
+Examples:
+{few_shot_examples}
+
+Text: {input_text}

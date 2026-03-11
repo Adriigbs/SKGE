@@ -1,0 +1,231 @@
+[
+    {
+        "input_text": "I am playing with a set of blocks where I need to arrange the blocks into stacks. Here are the actions I can do\\n\\nPick up a block\\nUnstack a block from on top of another block\\nPut down a block\\nStack a block on top of another block\\n\\nI have the following restrictions on my actions:\\nI can only pick up or unstack one block at a time.\\nI can only pick up or unstack a block if my hand is empty.\\nI can only pick up a block if the block is on the table and the block is clear. A block is clear if the block has no other blocks on top of it and if the block is not picked up.\\nI can only unstack a block from on top of another block if the block I am unstacking was really on top of the other block.\\nI can only unstack a block from on top of another block if the block I am unstacking is clear.\\nOnce I pick up or unstack a block, I am holding the block.\\nI can only put down a block that I am holding.\\nI can only stack a block on top of another block if I am holding the block being stacked.\\nI can only stack a block on top of another block if the block onto which I am stacking the block is clear.\\nOnce I put down or stack a block, my hand becomes empty.\\nOnce you stack a block on top of a second block, the second block is no longer clear.\\n\\n[STATEMENT]\\nAs initial conditions I have that, the red block is clear, the blue block is clear, the yellow block is clear, the hand is empty, the blue block is on top of the orange block, the red block is on the table, the orange block is on the table and the yellow block is on the table.\\n I have executed the following action sequence:\\n\\n[ACTION SEQUENCE]\\nunstack the blue block from on top of the orange block\\nput down the blue block\\npick up the orange block\\n[ACTION SEQUENCE END]\\n[RESULTING STATE]\\nthe red block is clear, the blue block is clear, the yellow block is clear, the hand is currently holding orange block, the red block is on the table, the blue block is on the table and the yellow block is on the table\\n\\n[STATEMENT]\\nAs initial conditions I have that, the red block is clear, the yellow block is clear, the hand is empty, the red block is on top of the blue block, the yellow block is on top of the orange block, the blue block is on the table and the orange block is on the table.\\n I have executed the following action sequence:\\n\\n[ACTION SEQUENCE]\\nunstack the yellow block from on top of the orange block\\n[ACTION SEQUENCE END]\\n[RESULTING STATE]\\n\n",
+        "oie": [
+            [
+                "block",
+                "canBePickedUp",
+                "table"
+            ],
+            [
+                "block",
+                "canBeUnstacked",
+                "clear"
+            ],
+            [
+                "block",
+                "canBeUnstacked",
+                "onTopOf"
+            ],
+            [
+                "block",
+                "canBeStacked",
+                "clear"
+            ],
+            [
+                "block",
+                "canBeStacked",
+                "onTopOf"
+            ],
+            [
+                "hand",
+                "canHold",
+                "block"
+            ],
+            [
+                "hand",
+                "becomesEmpty",
+                "putDown"
+            ],
+            [
+                "hand",
+                "becomesEmpty",
+                "stack"
+            ],
+            [
+                "block",
+                "becomesClear",
+                "putDown"
+            ],
+            [
+                "block",
+                "becomesClear",
+                "stack"
+            ],
+            [
+                "block",
+                "becomesUnclear",
+                "stack"
+            ],
+            [
+                "block",
+                "canBePickedUp",
+                "clear"
+            ],
+            [
+                "block",
+                "canBePickedUp",
+                "onTable"
+            ],
+            [
+                "block",
+                "canBeUnstacked",
+                "onTopOf"
+            ],
+            [
+                "block",
+                "canBeUnstacked",
+                "clear"
+            ],
+            [
+                "hand",
+                "isCurrentlyHolding",
+                "block"
+            ],
+            [
+                "block",
+                "canBePutDown",
+                "hand"
+            ],
+            [
+                "block",
+                "canBeStacked",
+                "hand"
+            ],
+            [
+                "block",
+                "canBeStacked",
+                "clear"
+            ],
+            [
+                "red_block",
+                "isClear",
+                "initial"
+            ]
+        ],
+        "schema_definition": {
+            "Given the text and triples, the relation descriptions are as follows": "",
+            "canBePickedUp": "The subject entity can be picked up if it is in the state specified by the object entity.",
+            "canBeUnstacked": "The subject entity can be unstacked from the object entity if it is in the state specified by the object entity.",
+            "canBeStacked": "The subject entity can be stacked on top of the object entity if it is in the state specified by the object entity.",
+            "canHold": "The subject entity can hold the object entity.",
+            "becomesEmpty": "The subject entity becomes empty after the object entity occurs.",
+            "becomesClear": "The subject entity becomes clear after the object entity occurs.",
+            "becomesUnclear": "The subject entity becomes unclear after the object entity occurs.",
+            "isCurrentlyHolding": "The subject entity is currently holding the object entity.",
+            "canBePutDown": "The subject entity can be put down by the object entity.",
+            "isClear": "The subject entity is clear."
+        }
+    },
+    {
+        "input_text": "Benny saw a 10-foot shark with 2 6-inch remoras attached to it. What percentage of the shark's body length is the combined length of the remoras?",
+        "oie": [
+            [
+                "shark",
+                "has",
+                "10-foot_shark"
+            ],
+            [
+                "10-foot_shark",
+                "has",
+                "2"
+            ],
+            [
+                "2",
+                "has",
+                "6-inch_remoras"
+            ],
+            [
+                "6-inch_remoras",
+                "attachedTo",
+                "10-foot_shark"
+            ],
+            [
+                "10-foot_shark",
+                "hasLength",
+                "10"
+            ],
+            [
+                "6-inch_remoras",
+                "hasLength",
+                "6"
+            ],
+            [
+                "6-inch_remoras",
+                "has",
+                "2"
+            ],
+            [
+                "10-foot_shark",
+                "has",
+                "2"
+            ],
+            [
+                "10-foot_shark",
+                "has",
+                "6-inch_remoras"
+            ],
+            [
+                "6-inch_remoras",
+                "has",
+                "6"
+            ],
+            [
+                "6-inch_remoras",
+                "has",
+                "2"
+            ],
+            [
+                "10-foot_shark",
+                "has",
+                "10"
+            ],
+            [
+                "6-inch_remoras",
+                "has",
+                "6"
+            ],
+            [
+                "10-foot_shark",
+                "has",
+                "10"
+            ],
+            [
+                "6-inch_remoras",
+                "has",
+                "6"
+            ],
+            [
+                "10-foot_shark",
+                "has",
+                "10"
+            ],
+            [
+                "6-inch_remoras",
+                "has",
+                "6"
+            ],
+            [
+                "10-foot_shark",
+                "has",
+                "10"
+            ],
+            [
+                "6-inch_remoras",
+                "has",
+                "6"
+            ],
+            [
+                "10-foot_shark",
+                "has",
+                "10"
+            ]
+        ],
+        "schema_definition": {
+            "Based on the given text and triples, the relation descriptions are as follows": "",
+            "has": "The subject entity possesses or contains the object entity.",
+            "attachedTo": "The subject entity is attached to or is in contact with the object entity.",
+            "hasLength": "The subject entity has a length specified by the object entity."
+        }
+    }
+]
