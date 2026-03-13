@@ -1,5 +1,5 @@
 import logging
-from transformers import AutoTokenizer, AutoModelForCausalLM, BitsAndBytesConfig
+from transformers import AutoTokenizer, AutoModelForCausalLM
 import torch
 
 class HFModel:
@@ -21,11 +21,11 @@ class HFModel:
             dtype=torch.bfloat16)
 
 
-    def generate(self, prompt):
+    def generate(self, system_prompt, user_prompt):
 
         prompt = [
-            {"role": "system", "content": "Complete the plan for the last statement provided. Output only the plan steps. Start immediately with the first action."},
-            {"role": "user", "content": prompt}
+            {"role": "system", "content": system_prompt},
+            {"role": "user", "content": user_prompt}
         ]
 
         messages = self.tokenizer.apply_chat_template(prompt, add_generation_prompt=True, tokenize=False)
@@ -33,6 +33,7 @@ class HFModel:
         inputs = self.tokenizer(
             messages, 
             return_tensors="pt", 
+            truncation=True,
             max_length=2048,
             ).to(self.model.device)
         
