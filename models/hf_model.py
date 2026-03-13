@@ -21,12 +21,11 @@ class HFModel:
             dtype=torch.bfloat16)
 
 
-    def generate(self, system_prompt, user_prompt):
+    def generate(self, system_prompt, history):
 
-        prompt = [
-            {"role": "system", "content": system_prompt},
-            {"role": "user", "content": user_prompt}
-        ]
+        prompt = [{"role": "system", "content": system_prompt}]
+
+        prompt.extend(history)
 
         messages = self.tokenizer.apply_chat_template(prompt, add_generation_prompt=True, tokenize=False)
 
